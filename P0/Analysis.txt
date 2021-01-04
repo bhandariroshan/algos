@@ -1,0 +1,13 @@
+Worst Case Analysis
+---------------------
+Task 0: Since the read from first and last can be done directly without any iteration, the complexity will be: O(1)
+
+Task 1: Since there are 2 for loops and only if statements are executed inside, the complexity will be: O(n)
+
+Task 2: Since there is only 1 for loop and if statements inside it. Overall complexity will be: O(n)
+
+Task 3 Part A: O(nlogn) for sorting + O(n) for loop. Hence, Overall = O(nlogn)
+
+Task 3 Part B: O(n) for looping
+
+Task 4: O(3n) since there are 3 for loops with if staments inside and dictinorary inserts and search is O(1). Overall complexity = O(n)
