@@ -78,9 +78,10 @@ def partb():
     total_fixed_line_calls = 0
 
     for call in calls:
-        total_calls += 1
-        if call[0].startswith('(080)') and call[1].startswith('(080)'):
-            total_fixed_line_calls += 1
+        if call[0].startswith('(080)'):
+            total_calls += 1
+            if call[1].startswith('(080)'):
+                total_fixed_line_calls += 1
 
     percent = round(total_fixed_line_calls / total_calls * 100, 2)
     print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))

@@ -27,20 +27,17 @@ The list of numbers should be print out one per line in lexicographic order with
 
 def find_tele_marketers():
     telemarketers = set()
-    incoming_call_set = set()
-    texts_phone_set = set()
+    other_phone_set = set()
 
     for text in texts:
-        texts_phone_set.add(text[0])
-        texts_phone_set.add(text[1])
+        other_phone_set.add(text[0])
+        other_phone_set.add(text[1])
 
     for call in calls:
-        incoming_call_set.add(call[1])
+        other_phone_set.add(call[1])
+        telemarketers.add(call[0])
 
-    for call in calls:
-        if call[0] not in incoming_call_set and \
-            call[0] not in texts_phone_set:
-            telemarketers.add(call[0])
+    telemarketers = telemarketers - other_phone_set
 
     sorted_list =  sorted(list(telemarketers))
     print("These numbers could be telemarketers: ")
