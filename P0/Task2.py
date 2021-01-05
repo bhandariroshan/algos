@@ -23,20 +23,20 @@ September 2016.".
 """
 
 def find_max():
-	phone_call = {}
-	for call in calls:
-		phone_call[call[0]] = phone_call.get(call[0] , 0) + float(call[3])
-		phone_call[call[1]] = phone_call.get(call[1] , 0) + float(call[3])
+    phone_call = {}
+    for call in calls:
+        phone_call[call[0]] = phone_call.get(call[0] , 0) + float(call[3])
+        phone_call[call[1]] = phone_call.get(call[1] , 0) + float(call[3])
 
-	phone_call_list = []
-	for each_key in phone_call:
-		phone_call_list.append({'phone': each_key, 'duration': phone_call[each_key]})
+    phone_call_list = []
+    for each_key in phone_call:
+        phone_call_list.append({'phone': each_key, 'duration': phone_call[each_key]})
 
-	sorted_phone_calls = sorted(phone_call_list, key=lambda i: i['duration'], reverse=True)
-	print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(
-			sorted_phone_calls[0]['phone'], 
-			sorted_phone_calls[0]['duration']
-		)
-	)
+    sorted_phone_calls = sorted(phone_call_list, key=lambda i: i['duration'], reverse=True)
+    print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(
+            sorted_phone_calls[0]['phone'], 
+            sorted_phone_calls[0]['duration']
+        )
+    )
 
 find_max() 
