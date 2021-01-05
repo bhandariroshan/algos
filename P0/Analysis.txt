@@ -1,13 +1,15 @@
 Worst Case Analysis
 ---------------------
-Task 0: Since the read from first and last can be done directly without any iteration, the complexity will be: O(1)
+Task 0: In the code, data is read using indexing directly. For example first element is read using list[index] and last element is accesses using list[-1]. Since these operations does not involve any iteration and the list elements can be accessesed directly, the worst case complexity of the code will be constant i.e O(1). Here 1 represent 1 number of instruction to read data from list at first or last place. 
 
-Task 1: Since there are 2 for loops and only if statements are executed inside, the complexity will be: O(n)
+Task 1: Lets assume there are 'n' number of calls and 'm' number of texts. In the code, there are 2 for loops. First, for the first loop it reads all the texts and in each loop it add fist element of the list and second element of the list to the set. There are altogether, 2 list access and 2 set addition in that. So in worst case it will take 2*2*m instructions. Again another for loop reads all the calls and does similar operation so in worst case it will take 2*2*n instructions.
+So total instructions would be 2*2*(m+n). So the worst case time complexity of the code will be O(2*2*(m+n)). We can ignore the 2*2 part and just write the complexity to be O(m+n).
 
-Task 2: Since there is only 1 for loop and if statements inside it. Overall complexity will be: O(n)
 
-Task 3 Part A: O(nlogn) for sorting + O(n) for loop. Hence, Overall = O(nlogn)
+Task 2: Lets assume there are 'n' number of calls. Then at worst case there can be 'n' elements added in the phone_call_dict from the first for loop. Again, in second for loop it can append n dictionaries of counts to empty list phone_call_list. Now we need to sort the list. Sorting using python function taken O(nlog(n)) time where n is the lenth of list phone_call_list. So the overall time complexity of the code is: O(n*log(n)) for sorting + O(7n) for instructions inside for loop which is 7n = 6n (for addition, dictionary.get and assignment) + n in another loop to append value.
 
-Task 3 Part B: O(n) for looping
+Task 3 Part A: For this task, we need to loop across calls list and find the codes that match certain condition. As such, if the calls list has n number of elements then the for loop will run n times. At worst case, all 3 if statements would get satisfied and then the code inside gets executed. The while loop inside if statement in first for loop at worst case can run 11 times which is the number of telephone. For all other if statements there is only adding and checking few conditions. We can assume them to be altogether 10 instructions. So a total of 10+10=20n instructions would be generated and time complexity resulting from the first for loop would be 20n. For sorting for n number of elements it would take O(nlog(n)) time complexity in worst case. So overall complexity would be O(nlog(n)) + O(n). Taking maximum complexity this would be O(nlogn).
 
-Task 4: O(3n) since there are 3 for loops with if staments inside and dictinorary inserts and search is O(1). Overall complexity = O(n)
+Task 3 Part B: There is one for loop and if statements inside the for loop. If we assume the length of list to be 'n'. Then there would be 3n number of instructions generated inside the for loop. So worst case time complexity of the whole code would be O(2+3n) which we can assume to be O(n).
+
+Task 4: O(3n) There are 3 for loops with if staments inside the for loop. There are 4 instructions inside first for loop, 2 instuctions inside second for loop and 6 instructions inside third for loop. If we assume lenth of texts list to be m and calls list to be n, then the worst case time complexity would be (4m+2n+6n) = O(4m+6n) which we can assume to be O(m+n).

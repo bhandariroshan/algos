@@ -20,22 +20,16 @@ Print a message:
 """
 
 def find_phone_list():
-	phone_numbers  = {}
+	phone_numbers  = set()
 
 	for text in texts:
-		if phone_numbers.get(text[0], None) == None:
-			phone_numbers[text[0]] = 1 
-
-		if phone_numbers.get(text[1], None) == None:
-			phone_numbers[text[1]] = 1 
+		phone_numbers.add(text[0])
+		phone_numbers.add(text[1])
 
 	for call in calls:
-		if phone_numbers.get(call[0], None) == None:
-			phone_numbers[call[0]] = 1 
+		phone_numbers.add(call[0])
+		phone_numbers.add(call[1])
 
-		if phone_numbers.get(call[1], None):
-			phone_numbers[call[1]] = 1 
-
-	print ('There are {} different telephone numbers in the records.'.format(len(list(phone_numbers.keys()))))
+	print ('There are {} different telephone numbers in the records.'.format(len(phone_numbers)))
 
 find_phone_list()

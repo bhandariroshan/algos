@@ -26,26 +26,26 @@ The list of numbers should be print out one per line in lexicographic order with
 """
 
 def find_tele_marketers():
-	telemarketers = {}
-	incoming_call_dict = {}
-	texts_phone_dict = {}
+	telemarketers = set()
+	incoming_call_set = set()
+	texts_phone_set = set()
 
 	for text in texts:
-		if texts_phone_dict.get(text[0], None) == None:
-			texts_phone_dict[text[0]] = 1
-
-		if  texts_phone_dict.get(text[1], None) == None:
-			texts_phone_dict[text[1]] = 1
+		texts_phone_set.add(text[0])
+		texts_phone_set.add(text[1])
 
 	for call in calls:
-		if incoming_call_dict.get(call[1], None) == None:
-			incoming_call_dict[call[1]] = 1
+		incoming_call_set.add(call[1])
 
 	for call in calls:
-		if incoming_call_dict.get(call[0], None) == None and texts_phone_dict.get(call[0], None) == None and telemarketers.get(call[0], None) == None:
-			telemarketers[call[0]] = 1
+		if call[0] not in incoming_call_set and \
+			call[0] not in texts_phone_set:
+			telemarketers.add(call[0])
 
-	sorted_list =  sorted(list(telemarketers.keys()))
+	sorted_list =  sorted(list(telemarketers))
+	print("These numbers could be telemarketers: ")
+	for each_number in sorted_list:
+		print(each_number)
 	return sorted_list
 
-print("These numbers could be telemarketers: ", find_tele_marketers())
+find_tele_marketers()

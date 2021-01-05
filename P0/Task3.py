@@ -45,43 +45,31 @@ The percentage should have 2 decimal digits
 """
 
 def parta():
-    phone_dict = {}
+    codes = set()
     for call in calls:
-        if call[0] not in phone_dict:
-            phone_dict[call[0]] = 1
+        if not call[0].startswith('(080)'):
+            continue
 
-        if call[1] not in phone_dict:
-            phone_dict[call[1]] = 1
-
-    for call in calls:
-        if call[0] not in phone_dict:
-            phone_dict[call[0]] = 1
-
-        if call[1] not in phone_dict:
-            phone_dict[call[1]] = 1
-
-    code_list = {}
-    for phone in list(phone_dict.keys()):
-        if '(0' in phone:
+        if call[1].startswith('(0'):
             code_str = ''
-            count = 0
+            index = 0
             while ')' not in code_str:
-                code_str += phone[count]
-                count = count + 1
+                code_str += call[1][index]
+                index = index + 1
 
-            if code_str not in code_list:
-                code_list[code_str] = 1
+            code_str = code_str[1:-1]
+            codes.add(code_str) 
 
-        if '140' == phone[0:2]:
-            if phone[0:2] not in code_list:
-                code_list[phone[0:2]] = 1
+        if call[1].startswith('140'):
+            codes.add('140') 
 
-        if ' ' in phone and ('7' == phone[0] or '8' == phone[0] or '9' == phone[0]):
-            if phone[0:4] not in code_list:
-                code_list[phone[0:4]] = 1
+        if ' ' in call[1] and ('7' == call[1][0] or '8' == call[1][0] or '9' == call[1][0]):
+            codes.add(call[1][0:4])
 
-    sorted_code_list = sorted(list(code_list))
-    print("The numbers called by people in Bangalore have codes:", sorted_code_list)
+    sorted_code_list = sorted(list(codes))
+    print("The numbers called by people in Bangalore have codes:")
+    for each_code in sorted_code_list:
+        print(each_code)
     return sorted_code_list
 
 
@@ -91,7 +79,7 @@ def partb():
 
     for call in calls:
         total_calls += 1
-        if '(0' == call[0][0:2] and '(0' == call[1][0:2]:
+        if call[0].startswith('(080)') and call[1].startswith('(080)'):
             total_fixed_line_calls += 1
 
     percent = round(total_fixed_line_calls / total_calls * 100, 2)
