@@ -1,0 +1,1 @@
+The blockchain is implemented using linkedlist. Adding a block takes, O(n) operation, since it has to travel to the end of the list to insert the element.
