@@ -1,1 +1,1 @@
-The blockchain is implemented using linkedlist. Adding a block takes, O(n) operation, since it has to travel to the end of the list to insert the element.
+The blockchain is implemented using linkedlist. Since I am using 2 pointers, one to keep track to block chain and another to keep track of tail or last, insert can be done easily in O(1) complexity. Hence the overall coplexity of the code is O(1).

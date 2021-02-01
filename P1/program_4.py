@@ -27,16 +27,7 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    groups = group.get_groups()
-    users = group.get_users()
-
-    if user in users:
-        return True
-
-    for each_group in groups:
-        return is_user_in_group(user, each_group)
-
-    return False
+    return user in group.users or any(is_user_in_group(user, sub_group) for sub_group in group.get_groups())
 
 def test():
     # Test Cases

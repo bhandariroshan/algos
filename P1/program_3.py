@@ -13,29 +13,16 @@ class PriorityQueue:
     def __init__(self, node=None):
         self.start = node
         self.size = 0
+        self.last = None
 
     def append(self, new_node):
-        node = self.start
-
-        if node is None:
+        if not self.start:
             self.start = new_node 
+            self.last = self.start
 
-        elif node.frequency >= new_node.frequency:
-            new_node.next = node
-            self.start = new_node
-
-        elif node.next is None and node.frequency < new_node.frequency:
-            node.next = new_node 
-
-        elif new_node.frequency >= node.frequency:
-
-            previous = node
-            while node:
-                previous = node
-                node  = node.next
-
-            previous.next = new_node
-            new_node.next = node 
+        else:
+            self.last.next = new_node
+            self.last = self.last.next
 
         self.size += 1
 
@@ -91,7 +78,7 @@ def traverse_tree_get_encoding(tree):
     if not tree:
         return None
 
-    if tree.left.character:
+    if tree.left and tree.left.character:
         solution[tree.left.character] = '0'
 
     else:
@@ -116,6 +103,11 @@ def huffman_encoding(data):
     if data == '':
         return encoded_data, tree
 
+    if len(data) == 1:
+        tree = Node(None, 1)
+        tree.left = Node(data, 1)
+        return '0', tree
+
     data_new = data
     data_dict = {}
     for each_char in data_new:
@@ -128,7 +120,7 @@ def huffman_encoding(data):
     for each_key in data_dict.keys():
         data_list.append(Node(each_key, data_dict[each_key]))
 
-    # data_list = sorted(data_list, key=lambda k: k.frequency)
+    data_list = sorted(data_list, key=lambda k: k.frequency)
     pq = PriorityQueue()
     while data_list:
         app = data_list.pop(0) 
@@ -153,7 +145,6 @@ def huffman_encoding(data):
         pq.append(internal_node)
 
     tree = pq.pop()
-    
     encoding_dict = traverse_tree_get_encoding(tree)
     for each_char in data:
         encoded_data += encoding_dict[each_char]
@@ -197,8 +188,14 @@ def test():
     encoded_data, tree = huffman_encoding(a_great_sentence)
     decoded_data = huffman_decoding(encoded_data, tree)  
     print ("Pass" if (a_great_sentence == decoded_data) else "Fail")
-      
+    
+
     a_great_sentence = "" 
+    encoded_data, tree = huffman_encoding(a_great_sentence)
+    decoded_data = huffman_decoding(encoded_data, tree) 
+    print ("Pass" if (a_great_sentence == decoded_data) else "Fail")
+
+    a_great_sentence = "A" 
     encoded_data, tree = huffman_encoding(a_great_sentence)
     decoded_data = huffman_decoding(encoded_data, tree) 
     print ("Pass" if (a_great_sentence == decoded_data) else "Fail")

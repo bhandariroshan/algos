@@ -18,17 +18,21 @@ class Block:
 
 
 class BlockChain:
-    def __init__(self, block):
+    def __init__(self, block=None):
         self.block = block
+        self.last = None
 
     def add_block(self, new_block):
         block = self.block
 
-        while block.next != None:
-            block = block.next
+        if not block:
+            self.block = new_block
+            self.last = self.block
 
-        new_block.previous_hash = block.hash
-        block.next = new_block
+        else:
+            new_block.previous_hash = self.last.hash
+            self.last.next = new_block
+            self.last = self.last.next
 
     def get_block(self, position):
         count = 1
@@ -46,7 +50,8 @@ class BlockChain:
 
 def test():
     # Test Cases
-    block_chain = BlockChain(Block('1-30-2021', 'My name is Roshan. '))
+    block_chain = BlockChain()
+    block_chain.add_block(Block('1-30-2021', 'My name is Roshan. '))
     block_chain.add_block(Block('1-30-2021', 'My last name is Bhandari.'))
     block_chain.add_block(Block('1-30-2021', 'I am a computer science major. '))
     block_chain.add_block(Block('1-30-2021', 'I live in South Carolina. '))
