@@ -1,0 +1,1 @@
+The time complexity of inserting n url routes of m words in the tries data structure is O(n*m). The lookup of a route on the other end will however take O(n) time complexity where n is the number of words in the url being looked for.

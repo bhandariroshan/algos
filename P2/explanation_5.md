@@ -1,0 +1,1 @@
+If there are m words of n length each, then the complexity of inserting all those words in the Tries datastructure with each letter as a key would be O(mn). For searching a word with l length, in the datastructure, it would take l dictionary queries, hence the complexity would be O(l).
