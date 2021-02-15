@@ -1,1 +1,5 @@
+# Time complexity of sort_012 function
 To solve this problem, I am using a single traversal and 3 pointers. One a cursor to keep track of position I reach, another to keep track of the position of 0's and another to keep track of the 2's. The concept is to balance O's and 2's by keeping them in front and back of the array. So as the traversal across the array starts, if i encounter a 0, I swap it with element in the 0's position tracker which starts from 0 and increase it. If i encounter 2 then, I swap it with element in the 2's position tracker which starts with last element i.e length of array and decrease it. If I encounter 1, I do nothing. I repeat this process until my cursor reaches the 2's position tracker. Since, everything here is done in single scan, the overall complexity of the algorithn is O(n).
+
+# Space complexity of sort_012 function
+Since I am using 3 variables to keep track of current position i.e 0's position and 2's position in the array and  no other data structure, overall space complexity of the program would be O(1).

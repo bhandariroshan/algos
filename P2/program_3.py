@@ -16,13 +16,13 @@ def merge(left, right):
     second = None
     result = []
     while len(left)>0 or len(right) > 0:
-        if not first and len(left) > 0:
+        if first is None and len(left) > 0:
             first = left.pop(0)
 
-        if not second and len(right) > 0:
+        if second is None and len(right) > 0:
             second = right.pop(0)
 
-        if first and second:
+        if first is not None  and second is not None:
             if first >= second:
                 result.append(second)
                 second = None
@@ -31,11 +31,11 @@ def merge(left, right):
                 result.append(first)
                 first = None
 
-        if first and len(right) == 0:
+        if first is not None and len(right) == 0:
             result.append(first)
             first = None
 
-        if second and len(left) == 0:
+        if second is not None and len(left) == 0:
             result.append(second) 
             second = None
 
@@ -79,7 +79,8 @@ def rearrange_digits(input_list):
             two += elem * 10 ** two_pow
             two_pow += 1
 
-    return [one, two]
+    solution = [one, two]
+    return solution
 
     # for i in range(0, len(sorted_array)):
 
@@ -95,5 +96,7 @@ def test_function(test_case):
 test_function([[1, 2, 3, 4, 5], [531, 42]]) 
 test_function( [[4, 6, 2, 5, 9, 8], [964, 852]])
 test_function([[], []])
+test_function([[0,0,9,1,0], [910,0]])
+test_function([[5,5,5], [55,5]])
 test_function([[1,2], [1, 2]])
 test_function([[1], [1]])
